@@ -4,6 +4,85 @@
 
 {% block content %}
 
-    <h2>Commandes</h2>
+    <br>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="box-element" id='form-wrapper'>
+                <form action="" id="form">
+                    {#                    <div class="border border-success" id="user-info">#}
+                    <!--  Affichage des informations personnelles du client  -->
+                    <p>Informations Personnelles:</p>
+                    <div class="row p-2" id="user-info">
+                        <div class="col-12 col-sm-6 form-field">
+                            <input type="text" class="form-control" name="name" placeholder="Nom..." required>
+                        </div>
+                        <div class="col-12 col-sm-6 form-field">
+                            <input type="text" class="form-control" name="username" placeholder="Prénom..."
+                                   required>
+                        </div>
+                        <div class="col-12 col-sm-6 form-field">
+                            <input type="text" class="form-control" name="tel" placeholder="Tel..." required>
+                        </div>
+                        <div class="col-12 col-sm-6 form-field">
+                            <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                        </div>
+                    </div>
+                    {#                    </div>#}
+                    <div id="shipping-info">
+                        <hr>
+                        <!--  Affichage des informations d'expéditions du client  -->
+                        <p>Informations d'Expédition:</p>
+                        <div class="row p-2" id="user-info">
+                            <div class="col-12 col-sm-6 form-field">
+                                <input type="text" class="form-control" name="address" placeholder="address..."
+                                       required>
+                            </div>
+                            <div class="col-12 col-sm-6 form-field">
+                                <input type="text" class="form-control" name="city" placeholder="Ville..." required>
+                            </div>
+                            <div class="col-12 col-sm-6 form-field">
+                                <input type="text" class="form-control" name="state" placeholder="Pays..." required>
+                            </div>
+                            <div class="col-12 col-sm-6 form-field">
+                                <input type="text" class="form-control" name="zipcode" placeholder="Zip code..."
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <input id="form-button" class="btn w-100 btn-success btn-block" type="submit" value="Continuer">
+                </form>
+            </div>
+
+            <br>
+
+            <!--  Affichage des modes de paiments  -->
+            <div class="box-element hidden" id="payment-info">
+                <small> Option Paypal </small>
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'shop:panier' %}">&#x2190; Retour au panier </a>
+                <hr>
+                <h3>Recapitulatif de la commande</h3>
+                <hr>
+                {% for article in articles %}
+                    <div class="panier-row">
+                        <div style="flex:2"><img class="row-image" src="{{ article.produit.imageUrl }}" alt="">
+                        </div>
+                        <div style="flex:2">{{ article.produit.name }}</div>
+                        <div style="flex:1">${{ article.produit.price }}</div>
+                        <div style="flex:1">{{ article.quantite }}</div>
+                    </div>
+                {% endfor %}
+                <h5>Articles: {{ commande.get_panier_articles }}</h5>
+                <h5>Total: $ {{ commande.get_panier_total }}</h5>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

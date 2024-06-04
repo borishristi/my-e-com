@@ -5,37 +5,20 @@
 {% block content %}
     <h1 class="test_css" style="color: #4ac1f7">Je vérifie si mon css donne sur ma page</h1>
     <div class="row">
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'images/cart-img.png' %}" alt="">
-            <div class="box-element product">
-                <h6>Produit</h6>
-                <hr>
-                <button class="btn btn-outline-secondary">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h3 style="float: right;">$10</h3>
-            </div>
-        </div>
+        {% for produit in produits %}
 
-        <div class="col-lg-4">
-            <img class="thumbnail"  src="{% static 'images/cart-img.png' %}" alt="">
-            <div class="box-element product">
-                <h6>Produit</h6>
-                <hr>
-                <button class="btn btn-outline-secondary">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h3 style="float: right;">$10</h3>
+            <div class="col-lg-3 p-1">
+                <img class="thumbnail" src=" {{ produit.imageUrl }} " alt="">
+                <div class="box-element product">
+                    <h6>{{ produit.name }}</h6>
+                    <hr>
+                    <button class="btn btn-outline-secondary">Ajouter au panier</button>
+                    <a class="btn btn-outline-success" href="#">Voir</a>
+                    <h3 style="float: right;">${{ produit.price }}</h3>
+                </div>
             </div>
-        </div>
 
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'images/cart-img.png' %}" alt="">
-            <div class="box-element product">
-                <h6>Produit</h6>
-                <hr>
-                <button class="btn btn-outline-secondary">Ajouter au panier</button>
-                <a class="btn btn-outline-success" href="#">Voir</a>
-                <h3 style="float: right;">$10</h3>
-            </div>
-        </div>
+        {% endfor %}
+
     </div>
 {% endblock content %}
