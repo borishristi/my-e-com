@@ -33,6 +33,7 @@
                     <div style="flex:1"><strong>Total</strong></div>
                 </div>
 
+                {# On affiche tous les produits contenus dans le panier grâce à une boucle for #}
                 {% for article in articles %}
                     <div class="panier-row">
                         <div style="flex:2"><img class="row-image" src="{{ article.produit.imageUrl }}" alt="">
@@ -42,8 +43,12 @@
                         <div style="flex:1">
                             <p class="quantite">{{ article.quantite }}</p>
                             <div class="quantite">
-                                <img class="chg-quantite" src="{% static 'images/arrow-up.png' %}" alt="">
-                                <img class="chg-quantite" src="{% static 'images/arrow-down.png' %}" alt="">
+                                <img class="chg-quantite update-panier"
+                                     data-produit="{{ article.produit.pk }}" data-action="add"
+                                     src="{% static 'images/arrow-up.png' %}" alt="">
+                                <img class="chg-quantite update-panier" data-produit="{{ article.produit.pk }}"
+                                     data-action="remove" src="{% static 'images/arrow-down.png' %}"
+                                     alt="">
                             </div>
                         </div>
                         <div style="flex:1">${{ article.get_total }}</div>

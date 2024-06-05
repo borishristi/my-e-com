@@ -5,6 +5,7 @@
 {% block content %}
     <h1 class="test_css" style="color: #4ac1f7">Je vérifie si mon css donne sur ma page</h1>
     <div class="row">
+        {#  On affiche tous les produits grâce à une boucle for  #}
         {% for produit in produits %}
 
             <div class="col-lg-3 p-1">

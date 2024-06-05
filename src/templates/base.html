@@ -19,13 +19,14 @@
     <script type="text/javascript">
         let user = "{{ request.user }}";
 
+        {# Cette fonction permet de transmettre les données csrf grâce qu cookies sans passer par un formulaire #}
         function getToken(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie != '') {
                 let cookies = document.cookie.split(';');
                 for (let i = 0; i < cookies.length; i++) {
                     let cookie = jQuery.trim(cookies[i]);
-// Does this cookie string begin with the name we want?
+                    // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                         break;
@@ -37,6 +38,7 @@
 
         let csrftoken = getToken('csrftoken');
     </script>
+
 </head>
 <body>
 {#  Debut du navbar#}
@@ -74,7 +76,7 @@
                 <a href="{% url 'shop:panier' %}">
                     <img id="icon-panier" src="{% static 'images/panier.png' %}" alt="">
                 </a>
-                <p id="total-panier">0</p>
+                <p id="total-panier">{{ nombre_article }}</p>
             </div>
         </div>
     </div>
