@@ -85,4 +85,12 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        {#        On vérifie si le produit est digital ou non pour afficher ou pas les informations de livraison #}
+        let produitPhysique = "{{ commande.produit_physique }}"
+
+        if (produitPhysique == "False") {
+            document.getElementById('shipping-info').innerText = '';
+        }
+    </script>
 {% endblock content %}
