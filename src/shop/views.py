@@ -2,6 +2,8 @@ from django.http import HttpRequest
 from django.shortcuts import render
 
 from .models import *
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 
@@ -62,3 +64,11 @@ def commande(request, *args, **kwargs):
     }
 
     return render(request, 'shop/commande.html', context)
+
+
+def update_article(request, *args, **kwargs):
+    data = json.loads(request.body)
+    produit_id = data['produit_id']
+    action = data['action']
+    print(action, produit_id)
+    return JsonResponse({'produit modifier': 'yes'}, safe=False)
