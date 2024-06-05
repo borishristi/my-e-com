@@ -11,46 +11,46 @@
                 <form action="" id="form">
                     {#                    <div class="border border-success" id="user-info">#}
                     <!--  Affichage des informations personnelles du client  -->
-                    <p>Informations Personnelles:</p>
                     <div class="row p-2" id="user-info">
+                        <p>Informations Personnelles:</p>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="text" class="form-control" name="name" placeholder="Nom..." required>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nom..." required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="text" class="form-control" name="username" placeholder="Prénom..."
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Prénom..."
                                    required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="text" class="form-control" name="tel" placeholder="Tel..." required>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Tel..." required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email..." required>
                         </div>
                     </div>
                     {#                    </div>#}
                     <div id="shipping-info">
                         <hr>
                         <!--  Affichage des informations d'expéditions du client  -->
-                        <p>Informations d'Expédition:</p>
                         <div class="row p-2" id="user-info">
+                            <p>Informations d'Expédition:</p>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" name="address" placeholder="address..."
+                                <input type="text" class="form-control" id="address" name="address" placeholder="address..."
                                        required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" name="city" placeholder="Ville..." required>
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Ville..." required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" name="state" placeholder="Pays..." required>
+                                <input type="text" class="form-control" id="state" name="state" placeholder="Pays..." required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" name="zipcode" placeholder="Zip code..."
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zip code..."
                                        required>
                             </div>
                         </div>
+                        <hr>
+                        <input id="form-button" class="btn w-100 btn-success btn-block" type="submit" value="Continuer">
                     </div>
-                    <hr>
-                    <input id="form-button" class="btn w-100 btn-success btn-block" type="submit" value="Continuer">
                 </form>
             </div>
 
@@ -59,6 +59,7 @@
             <!--  Affichage des modes de paiments  -->
             <div class="box-element hidden" id="payment-info">
                 <small> Option Paypal </small>
+                <button class="btn btn-success w-100 btn-block" id="make-payment">Effectuer le paiement</button>
             </div>
 
         </div>
@@ -87,10 +88,96 @@
 
     <script type="text/javascript">
         {#        On vérifie si le produit est digital ou non pour afficher ou pas les informations de livraison #}
-        let produitPhysique = "{{ commande.produit_physique }}"
+        let produitPhysique = "{{ commande.produit_physique }}";
+        let total = "{{ commande.get_panier_total }}";
 
         if (produitPhysique == "False") {
             document.getElementById('shipping-info').innerText = '';
         }
+
+        if (user != "AnonymousUser") {
+            document.getElementById('user-info').innerText = '';
+        }
+
+        if (produitPhysique == "False" && user != "Anonymous") {
+            document.getElementById('form-wrapper').innerHTML = '';
+            document.getElementById('payment-info').classList.remove('hidden');
+        }
+
+        let form = document.getElementById('form-button');
+        form.addEventListener('click', function (e) {
+            {# Empêche que la page ne se recharge #}
+            e.preventDefault();
+            console.log('Données en cours ...');
+            document.getElementById('form-button').classList.add('hidden');
+            document.getElementById('payment-info').classList.remove('hidden');
+        })
+
+        document.getElementById('payment-info').addEventListener('click', function (data) {
+            console.log('On active le bouton de paiement')
+            SubmitFormData();
+        });
+
+        function SubmitFormData() {
+            let userFormData = {
+                'name': null,
+                'username': null,
+                'phone': null,
+                'email': null,
+                {#'total': 2552.12,#}
+                'total': total,
+            }
+            let shippingUserInfo = {
+                'address': null,
+                'city': null,
+                'state': null,
+                'zipcode': null,
+            }
+            if (produitPhysique != "False") {
+                console.log('On commence à récupérer les donnees d\'expédition');
+                shippingUserInfo.address = document.getElementById('address').value;
+                shippingUserInfo.city = document.getElementById('city').value;
+                shippingUserInfo.state = document.getElementById('state').value;
+                shippingUserInfo.zipcode = document.getElementById('zipcode').value;
+
+                {#console.log('On commence à récupérer les donnees d\'expédition');#}
+                {#console.log(form.address.valueOf());#}
+                {#shippingUserInfo.address = form.address.valueOf();#}
+                {#shippingUserInfo.city = form.city.valueOf();#}
+                {#shippingUserInfo.state = form.state.valueOf();#}
+                {#shippingUserInfo.zipcode = form.zipcode.valueOf();#}
+            }
+            if (user == "anonymousUser") {
+                userFormData.name = document.getElementById('name').value;
+                userFormData.username = document.getElementById('username').value;
+                userFormData.phone = document.getElementById('phone').value;
+                userFormData.email = document.getElementById('email').value;
+
+                {#userFormData.name = form.name.value;#}
+                {#userFormData.username = form.username.value;#}
+                {#userFormData.phone = form.phone.value;#}
+                {#userFormData.email = form.email.value;#}
+            }
+
+            let url ='/traitement_commande/';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken
+                },
+                body: JSON.stringify({"form": userFormData, "shipping": shippingUserInfo})
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('data', data);
+                    alert("Traitement commande terminé");
+                    window.location.href = "{% url 'shop:shop' %}";
+                })
+        }
+
     </script>
 {% endblock content %}

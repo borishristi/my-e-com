@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpRequest
 from django.shortcuts import render
 
@@ -135,3 +137,37 @@ def update_article(request, *args, **kwargs):
         commande_article.delete()
 
     return JsonResponse({'panier modifier': 'yes'}, safe=False)
+
+
+def traitement_commande(request, *args, **kwargs):
+    data = json.loads(request.body)
+    transaction_id = datetime.now().timestamp()
+
+    if request.user.is_authenticated:
+        client = request.user.client
+
+        commande, created = Commande.objects.get_or_create(client=client, complete=False)
+
+        print(f"Le total est : {data['form']['total']}")
+        print(type(data['form']['total']))
+        my_str = '24.77,00'
+        my_float = float(my_str.split(',')[0])
+        print(my_float)
+        total = float(data['form']['total'].split(",")[0])
+        commande.transaction_id = transaction_id
+        if commande.get_panier_total == total:
+            commande.complete = True
+            commande.save()
+
+        if commande.produit_physique:
+            AddressChipping.objects.create(
+                client=client,
+                commande=commande,
+                addresse=data['shipping']['address'],
+                ville=data['shipping']['city'],
+                zipcode=data['shipping']['zipcode']
+            )
+    else:
+        print('utilisateur non connecté')
+
+    return JsonResponse('Traitement complet', safe=False)
