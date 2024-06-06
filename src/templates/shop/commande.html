@@ -79,7 +79,7 @@
                         <div style="flex:1">{{ article.quantite }}</div>
                     </div>
                 {% endfor %}
-                <h5>Articles: {{ commande.get_panier_articles }}</h5>
+                <h5>Articles: {{ commande.get_panier_articles }} | {{ nombre_article }}</h5>
                 <h5>Total: $ {{ commande.get_panier_total }}</h5>
 
             </div>

@@ -33,10 +33,33 @@ for (let i = 0; i < produitBtn.length; i++) {
         //Si l'utilisateur n'est pas connecté on effectue une opération dans le cas contraire,
         //on appelle la fonction de mise à jour du produit.
         if (user == 'AnonymousUser') {
-            console.log('utilisateur anonyme');
+            addCookieArticle(produitId, action);
         } else {
             updateUserCommande(produitId, action);
         }
     })
 }
 
+function addCookieArticle(produitId, action) {
+    // console.log('utilisateur anonyme de la function addCookieArticle');
+
+    if (action == 'add') {
+        if (panier[produitId] == undefined) {
+            panier[produitId] = {"qte": 1};
+        }
+        else {
+            panier[produitId]['qte'] += 1;
+        }
+    }
+    //
+    if (action == 'remove') {
+        panier[produitId]['qte'] -= 1;
+        if (panier[produitId]['qte'] <= 0) {
+            delete panier[produitId];
+        }
+    }
+
+    document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/"
+    console.log(panier);
+    location.reload();
+}

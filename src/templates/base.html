@@ -20,6 +20,7 @@
         let user = "{{ request.user }}";
 
         {# Cette fonction permet de transmettre les données csrf grâce qu cookies sans passer par un formulaire #}
+
         function getToken(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie != '') {
@@ -37,6 +38,34 @@
         }
 
         let csrftoken = getToken('csrftoken');
+
+        function getCookie(name) {
+            let cookieArr = document.cookie.split(";");
+            // Loop through the array elements
+            for (let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split("=");
+                /* Removing whitespace at the beginning of the cookie name
+                and compare i with the given string */
+                if (name == cookiePair[0].trim()) {
+                    // Decode the cookie value and return
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+            // Return null if not found
+            console.log('Nous ne retrouvons pas le cookie nommé ', name);
+            return null;
+        }
+
+        let panier = JSON.parse(getCookie('panier'));
+        if (panier == undefined) {
+            console.log('Le cookie nommé  ', panier, " est vide.");
+            panier = {};
+            console.log('Cookie créé');
+            document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
+        }
+
+        console.log('panier', panier);
+
     </script>
 
 </head>
@@ -45,7 +74,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">My E-com</a>
+        <a class="navbar-brand" href="{% url 'shop:shop' %}">My E-com</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -72,6 +101,7 @@
                 </li>
             </ul>
             <div class="form-inline my-2 my-lg-0">
+                <span class="me-3">{{ user|capfirst }}</span>
                 <a href="#" class="btn btn-warning">Connexion</a>
                 <a href="{% url 'shop:panier' %}">
                     <img id="icon-panier" src="{% static 'images/panier.png' %}" alt="">

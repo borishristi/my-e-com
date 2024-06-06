@@ -37,12 +37,15 @@ def shop(request, *args, **kwargs):
 
     else:
         # Si l'utilisateur n'est pas connecté, on réinitialise son panier à 0.
-        articles = []
-        commande = {
-            'get_panier_total': 0,
-            'get_panier_article': 0,
-        }
-        nombre_article = commande['get_panier_article']
+        nombre_article = 0
+        try:
+            panier = json.loads(request.COOKIES.get('panier'))
+            for obj in panier:
+                nombre_article += panier[obj]['qte']
+
+        except:
+            panier = []
+        print(panier)
 
     context = {
         'produits': produits,
@@ -63,11 +66,42 @@ def panier(request, *args, **kwargs):
         nombre_article = commande.get_panier_articles
     else:
         articles = []
+
         commande = {
             'get_panier_total': 0,
             'get_panier_article': 0,
+            'produit_physique': True,
         }
         nombre_article = commande['get_panier_article']
+
+        try:
+            panier = json.loads(request.COOKIES.get('panier'))
+            for obj in panier:
+                nombre_article += panier[obj]['qte']
+                produit = Produit.objects.get(id=obj)
+                total = produit.price * panier[obj]['qte']
+                commande['get_panier_article'] += panier[obj]['qte']
+                commande['get_panier_total'] += total
+
+                article = {
+                    'produit': {
+                        'pk': produit.id,
+                        'name': produit.name,
+                        'price': produit.price,
+                        'imageUrl': produit.imageUrl
+                    },
+                    'quantite': panier[obj]['qte'],
+                    'get_total': total
+                }
+
+                articles.append(article)
+
+                if produit.digital == False:
+                    commande['produit_physique'] = True
+
+        except:
+            panier = []
+        print(panier)
 
     context = {
         'articles': articles,
@@ -87,11 +121,42 @@ def commande(request, *args, **kwargs):
 
     else:
         articles = []
+
         commande = {
             'get_panier_total': 0,
             'get_panier_article': 0,
+            'produit_physique': True,
         }
         nombre_article = commande['get_panier_article']
+
+        try:
+            panier = json.loads(request.COOKIES.get('panier'))
+            for obj in panier:
+                nombre_article += panier[obj]['qte']
+                produit = Produit.objects.get(id=obj)
+                total = produit.price * panier[obj]['qte']
+                commande['get_panier_article'] += panier[obj]['qte']
+                commande['get_panier_total'] += total
+
+                article = {
+                    'produit': {
+                        'pk': produit.id,
+                        'name': produit.name,
+                        'price': produit.price,
+                        'imageUrl': produit.imageUrl
+                    },
+                    'quantite': panier[obj]['qte'],
+                    'get_total': total
+                }
+
+                articles.append(article)
+
+                if produit.digital == False:
+                    commande['produit_physique'] = True
+
+        except:
+            panier = []
+        print(panier)
 
     context = {
         'articles': articles,
