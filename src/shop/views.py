@@ -9,6 +9,9 @@ from .models import *
 from django.http import JsonResponse
 # Pour charger les données en json
 import json
+
+from .utiles import panier_cookie, data_cookie
+
 # Pour vérifier si l'utilisateur est connecté
 from django.contrib.auth.decorators import login_required
 
@@ -22,30 +25,30 @@ def shop(request, *args, **kwargs):
     produits = Produit.objects.all()
 
     # Vérification de la connectivité de l'utilisateur et récupérateur des informations sur le panier
-    if request.user.is_authenticated:
+    # if request.user.is_authenticated:
+    #
+    #     # On récupère les informations du client connecté
+    #     client = request.user.client
+    #
+    #     # On vérifie si le client connecté a une commande en cours et qu'elle n'est pas complete
+    #     # sinon on crée une commande.
+    #
+    #     commande, created = Commande.objects.get_or_create(client=client, complete=False)
+    #
+    #     # On récupère le nombre d'articles du panier
+    #     nombre_article = commande.get_panier_articles
+    #
+    # else:
+    #     # Si l'utilisateur n'est pas connecté, on réinitialise son panier à 0.
+    #     cookie_panier = panier_cookie(request)
+    #     articles = cookie_panier['articles']
+    #     commande = cookie_panier['commande']
+    #     nombre_article = cookie_panier['nombre_article']
 
-        # On récupère les informations du client connecté
-        client = request.user.client
-
-        # On vérifie si le client connecté a une commande en cours et qu'elle n'est pas complete
-        # sinon on crée une commande.
-
-        commande, created = Commande.objects.get_or_create(client=client, complete=False)
-
-        # On récupère le nombre d'articles du panier
-        nombre_article = commande.get_panier_articles
-
-    else:
-        # Si l'utilisateur n'est pas connecté, on réinitialise son panier à 0.
-        nombre_article = 0
-        try:
-            panier = json.loads(request.COOKIES.get('panier'))
-            for obj in panier:
-                nombre_article += panier[obj]['qte']
-
-        except:
-            panier = []
-        print(panier)
+    data = data_cookie(request)
+    articles = data['articles']
+    commande = data['commande']
+    nombre_article = data['nombre_article']
 
     context = {
         'produits': produits,
@@ -57,51 +60,10 @@ def shop(request, *args, **kwargs):
 
 def panier(request, *args, **kwargs):
     # Vérification de la connectivité de l'utilisateur et récupérateur des informations sur le panier
-    if request.user.is_authenticated:
-        client = request.user.client
-        commande, created = Commande.objects.get_or_create(client=client, complete=False)
-
-        # On récupère tous les articles commandés par le client
-        articles = commande.commandearticle_set.all()
-        nombre_article = commande.get_panier_articles
-    else:
-        articles = []
-
-        commande = {
-            'get_panier_total': 0,
-            'get_panier_article': 0,
-            'produit_physique': True,
-        }
-        nombre_article = commande['get_panier_article']
-
-        try:
-            panier = json.loads(request.COOKIES.get('panier'))
-            for obj in panier:
-                nombre_article += panier[obj]['qte']
-                produit = Produit.objects.get(id=obj)
-                total = produit.price * panier[obj]['qte']
-                commande['get_panier_article'] += panier[obj]['qte']
-                commande['get_panier_total'] += total
-
-                article = {
-                    'produit': {
-                        'pk': produit.id,
-                        'name': produit.name,
-                        'price': produit.price,
-                        'imageUrl': produit.imageUrl
-                    },
-                    'quantite': panier[obj]['qte'],
-                    'get_total': total
-                }
-
-                articles.append(article)
-
-                if produit.digital == False:
-                    commande['produit_physique'] = True
-
-        except:
-            panier = []
-        print(panier)
+    data = data_cookie(request)
+    articles = data['articles']
+    commande = data['commande']
+    nombre_article = data['nombre_article']
 
     context = {
         'articles': articles,
@@ -113,50 +75,10 @@ def panier(request, *args, **kwargs):
 
 
 def commande(request, *args, **kwargs):
-    if request.user.is_authenticated:
-        client = request.user.client
-        commande, created = Commande.objects.get_or_create(client=client, complete=False)
-        articles = commande.commandearticle_set.all()
-        nombre_article = commande.get_panier_articles
-
-    else:
-        articles = []
-
-        commande = {
-            'get_panier_total': 0,
-            'get_panier_article': 0,
-            'produit_physique': True,
-        }
-        nombre_article = commande['get_panier_article']
-
-        try:
-            panier = json.loads(request.COOKIES.get('panier'))
-            for obj in panier:
-                nombre_article += panier[obj]['qte']
-                produit = Produit.objects.get(id=obj)
-                total = produit.price * panier[obj]['qte']
-                commande['get_panier_article'] += panier[obj]['qte']
-                commande['get_panier_total'] += total
-
-                article = {
-                    'produit': {
-                        'pk': produit.id,
-                        'name': produit.name,
-                        'price': produit.price,
-                        'imageUrl': produit.imageUrl
-                    },
-                    'quantite': panier[obj]['qte'],
-                    'get_total': total
-                }
-
-                articles.append(article)
-
-                if produit.digital == False:
-                    commande['produit_physique'] = True
-
-        except:
-            panier = []
-        print(panier)
+    data = data_cookie(request)
+    articles = data['articles']
+    commande = data['commande']
+    nombre_article = data['nombre_article']
 
     context = {
         'articles': articles,
