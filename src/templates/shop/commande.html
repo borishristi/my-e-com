@@ -17,14 +17,17 @@
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nom..." required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Prénom..."
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="Prénom..."
                                    required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Tel..." required>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Tel..."
+                                   required>
                         </div>
                         <div class="col-12 col-sm-6 form-field">
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email..." required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email..."
+                                   required>
                         </div>
                     </div>
                     {#                    </div>#}
@@ -34,17 +37,21 @@
                         <div class="row p-2" id="user-info">
                             <p>Informations d'Expédition:</p>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" id="address" name="address" placeholder="address..."
+                                <input type="text" class="form-control" id="address" name="address"
+                                       placeholder="address..."
                                        required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Ville..." required>
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Ville..."
+                                       required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" id="state" name="state" placeholder="Pays..." required>
+                                <input type="text" class="form-control" id="state" name="state" placeholder="Pays..."
+                                       required>
                             </div>
                             <div class="col-12 col-sm-6 form-field">
-                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zip code..."
+                                <input type="text" class="form-control" id="zipcode" name="zipcode"
+                                       placeholder="Zip code..."
                                        required>
                             </div>
                         </div>
@@ -147,7 +154,7 @@
                 {#shippingUserInfo.state = form.state.valueOf();#}
                 {#shippingUserInfo.zipcode = form.zipcode.valueOf();#}
             }
-            if (user == "anonymousUser") {
+            if (user == "AnonymousUser") {
                 userFormData.name = document.getElementById('name').value;
                 userFormData.username = document.getElementById('username').value;
                 userFormData.phone = document.getElementById('phone').value;
@@ -159,7 +166,7 @@
                 {#userFormData.email = form.email.value;#}
             }
 
-            let url ='/traitement_commande/';
+            let url = '/traitement_commande/';
 
             fetch(url, {
                 method: 'POST',
@@ -175,7 +182,10 @@
                 .then((data) => {
                     console.log('data', data);
                     alert("Traitement commande terminé");
+                    panier = {};
+                    document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
                     window.location.href = "{% url 'shop:shop' %}";
+
                 })
         }
 
