@@ -9,6 +9,7 @@
         <div class="col-lg-4">
             <div class="box-element" id='form-wrapper'>
                 <form action="" id="form">
+                    {% csrf_token %}
                     {#                    <div class="border border-success" id="user-info">#}
                     <!--  Affichage des informations personnelles du client  -->
                     <div class="row p-2" id="user-info">
@@ -65,8 +66,10 @@
 
             <!--  Affichage des modes de paiments  -->
             <div class="box-element hidden" id="payment-info">
-                <small> Option Paypal </small>
-                <button class="btn btn-success w-100 btn-block" id="make-payment">Effectuer le paiement</button>
+                <small> Choisissez votre mode de paiement </small>
+                <!-- Set up a container element for the button -->
+                <div id="paypal-button-container"></div>
+                {#                <button class="btn btn-success w-100 btn-block" id="make-payment">Effectuer le paiement</button>#}
             </div>
 
         </div>
@@ -93,10 +96,56 @@
         </div>
     </div>
 
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AW6GEh3tnivR-HWjrAwmYDKyRM_x6hplc60VY9yBT2zMNLclsRMjWXdvilprQxdcjYKiZNP-PdBWwX4p&currency=USD">
+
+    </script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container// Render the PayPal button into #paypal-button-container
+        let total_paypal = parseFloat('{{ commande.get_panier_total }}').toFixed(2);
+        console.log('le montant récupéré par paypal', total_paypal)
+
+        paypal.Buttons({
+
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'pay',
+                height: 40
+            },
+
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total_paypal //montant du paiement
+                        }
+                    }]
+                });
+            },
+
+            // Finalisation de la transaction
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    let transaction = orderData.purchase_units[0].payments.captures[0];
+                    console.log('+++++++++++++++++++++++++++++++')
+                    console.log('Une fois la transaction à paypal terminé, on appelle la fonction SubmitFormData')
+                    SubmitFormData(transaction.id, transaction.status);
+                })
+                //alert('You have successfully created subscription ' + data.subscriptionID); //Message d'alerte lorsque le paiment est effectué
+            }
+        }).render('#paypal-button-container');
+
+    </script>
+
     <script type="text/javascript">
         {#        On vérifie si le produit est digital ou non pour afficher ou pas les informations de livraison #}
         let produitPhysique = "{{ commande.produit_physique }}";
+        console.log('Est ce qu\'il y\'a un produit physique', produitPhysique);
         let total = "{{ commande.get_panier_total }}";
+        console.log('Le montant total de la transaction', total);
 
         if (produitPhysique == "False") {
             document.getElementById('shipping-info').innerText = '';
@@ -120,12 +169,18 @@
             document.getElementById('payment-info').classList.remove('hidden');
         })
 
-        document.getElementById('payment-info').addEventListener('click', function (data) {
-            console.log('On active le bouton de paiement')
-            SubmitFormData();
-        });
+        //document.getElementById('payment-info').addEventListener('click', function (data) {
+        //    console.log('On active le bouton de paiement')
+        //    SubmitFormData();
+        //});
 
-        function SubmitFormData() {
+        function SubmitFormData(transaction_id, status) {
+            paymentInfo = {
+                'transaction_id': transaction_id,
+                'status': status,
+                'total': total,
+            }
+
             let userFormData = {
                 'name': null,
                 'username': null,
@@ -174,7 +229,7 @@
                     "Content-Type": "application/json",
                     "X-CSRFToken": csrftoken
                 },
-                body: JSON.stringify({"form": userFormData, "shipping": shippingUserInfo})
+                body: JSON.stringify({"form": userFormData, "shipping": shippingUserInfo, 'paymentInfo': paymentInfo})
             })
                 .then((response) => {
                     return response.json();

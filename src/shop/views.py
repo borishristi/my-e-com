@@ -163,22 +163,35 @@ def commandeAnonyme(request, data):
 
 def traitement_commande(request, *args, **kwargs):
     data = json.loads(request.body)
-    transaction_id = datetime.now().timestamp()
+    # transaction_id = datetime.now().timestamp()
 
     if request.user.is_authenticated:
+        print('*' * 50)
+        print(f"Le client est bien authentifié")
         client = request.user.client
         commande, created = Commande.objects.get_or_create(client=client, complete=False)
-
+        print(f"le client est : {client}")
 
     else:
         client, commande = commandeAnonyme(request, data)
 
     total = float(data['form']['total'].split(",")[0])
-    commande.transaction_id = transaction_id
+    commande.transaction_id = data['paymentInfo']['transaction_id']
+    commande.total_trans = float(data['paymentInfo']['total'].split(",")[0])
+
+    print(data)
+    print(f"le total de notre transaction reçu au niveau du traitement de la commande est : {total}")
 
     if commande.get_panier_total == total:
         commande.complete = True
+        commande.status = data['paymentInfo']['status']
 
+    else:
+        commande.status = 'REFUSED'
+        commande.save()
+        return JsonResponse("Attention Traitement refusé Fraude détecté", safe=False)
+
+    print(f"On avons dépassé la vérification du prix et le statut est {commande.status}")
     commande.save()
 
     if commande.produit_physique:
