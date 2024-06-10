@@ -162,6 +162,9 @@ def commandeAnonyme(request, data):
 
 
 def traitement_commande(request, *args, **kwargs):
+
+    STATUS_TRANSACTION = ["ACCEPTED", 'COMPLETED', 'SUCCESS']
+
     data = json.loads(request.body)
     # transaction_id = datetime.now().timestamp()
 
@@ -203,4 +206,7 @@ def traitement_commande(request, *args, **kwargs):
             zipcode=data['shipping']['zipcode']
         )
 
-    return JsonResponse('Traitement complet', safe=False)
+    if not commande.status in STATUS_TRANSACTION:
+        return JsonResponse("Désolé, le paiement a échoué, veuillez réessayer.")
+
+    return JsonResponse('Commande effectué avec success. Vous serez livré dans un delai de 72h.', safe=False)

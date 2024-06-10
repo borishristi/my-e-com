@@ -66,7 +66,12 @@
 
             <!--  Affichage des modes de paiments  -->
             <div class="box-element hidden" id="payment-info">
-                <small> Choisissez votre mode de paiement </small>
+                <span style="text-align: center; display: block"><small class="h5 m-1"> Choisissez votre mode de paiement </small></span>
+                <div style="text-align: center">
+                    <button class="bg-info my-1" onclick="checkout()">
+                        <img class="row-image" src="{% static 'images/cinet.png' %}" alt="cinetpay">
+                    </button>
+                </div>
                 <!-- Set up a container element for the button -->
                 <div id="paypal-button-container"></div>
                 {#                <button class="btn btn-success w-100 btn-block" id="make-payment">Effectuer le paiement</button>#}
@@ -95,6 +100,45 @@
             </div>
         </div>
     </div>
+    <!-- Intégration du cinetpay comme mode de paiement -->
+    <script>
+        let total_cinetpay = parseFloat('{{ commande.get_panier_total }}').toFixed(2);
+
+        function checkout() {
+            CinetPay.setConfig({
+                apikey: '3620838756666c945b81c85.82467409',//   YOUR APIKEY
+                site_id: '5873588',//YOUR_SITE_ID
+                notify_url: 'http://mondomaine.com/notify/',
+                mode: 'TEST'
+            });
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: total_cinetpay,
+                currency: 'XAF',
+                channels: 'ALL',
+                description: 'My E-com',
+                //Fournir ces variables pour le paiements par carte bancaire
+                {% comment %}
+                customer_name:"Joe",//Le nom du client
+                customer_surname:"Down",//Le prenom du client
+                customer_email: "down@test.com",//l'email du client
+                customer_phone_number: "088767611",//l'email du client
+                customer_address : "BP 0024",//addresse du client
+                customer_city: "Antananarivo",// La ville du client
+                customer_country : "CM",// le code ISO du pays
+                customer_state : "CM",// le code ISO l'état
+                customer_zip_code : "06510", // code postal
+                {% endcomment %}
+
+            });
+            CinetPay.waitResponse(function (data) {
+                submitFormData(data.operator_id, data.status)
+            });
+            CinetPay.onError(function (data) {
+                console.log(data);
+            });
+        }
+    </script>
 
     <!-- Include the PayPal JavaScript SDK -->
     <script src="https://www.paypal.com/sdk/js?client-id=AW6GEh3tnivR-HWjrAwmYDKyRM_x6hplc60VY9yBT2zMNLclsRMjWXdvilprQxdcjYKiZNP-PdBWwX4p&currency=USD">
@@ -235,12 +279,12 @@
                     return response.json();
                 })
                 .then((data) => {
-                    console.log('data', data);
-                    alert("Traitement commande terminé");
+                    {#console.log('data', data);#}
+                    {#alert("Traitement commande terminé");#}
+                    swal.fire({icon: 'success', text: data}).then(result => {
+                        window.location.href = "{% url 'shop:shop' %}"});
                     panier = {};
                     document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
-                    window.location.href = "{% url 'shop:shop' %}";
-
                 })
         }
 
