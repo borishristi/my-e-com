@@ -3,25 +3,46 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="test_css" style="color: #4ac1f7">Je vérifie si mon css donne sur ma page</h1>
-    <div class="row">
-        {#  On affiche tous les produits grâce à une boucle for  #}
-        {% for produit in produits %}
-
-            <div class="col-12 col-sm-6 col-lg-3 p-1">
-                <img class="thumbnail" src=" {{ produit.imageUrl }} " alt="">
-                <div class="box-element product">
-                    <h6>{{ produit.name }}</h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary update-panier" data-produit="{{ produit.id }}"
-                            data-action="add">Ajouter au panier
-                    </button>
-                    <a class="btn btn-outline-success" href="#">Voir</a>
-                    <h3 style="float: right;">${{ produit.price }}</h3>
-                </div>
+    <div class="container mt-3">
+        <div class="row">
+            <!-- Containeur pour les actions, tris et autres -->
+            <div class="col-12 col-lg-2">
+                <h1>TRIER</h1>
             </div>
 
-        {% endfor %}
+            <!-- Containeur pour les produits à vendres -->
+            <div class="col-12 col-lg-10">
+                <div class="row">
+                    {#  On affiche tous les produits grâce à une boucle for  #}
+                    {% for produit in produits %}
+                        <div class="product-box col-12 col-md-6 col-lg-4 p-0">
+                            <div style="width: 330px; height: 450px; box-shadow: 0px 1px 5px 0px rgba(214,214,214,1)"
+                                 class="m-0 mt-3 m-auto p-1">
 
+                                <div class="image-box p-0 m-0">
+                                    <img style="width: 320px; height: 276px;" class="thumbnail m-auto"
+                                         src=" {{ produit.imageUrl }} " alt="">
+                                </div>
+
+                                <div class="">
+                                    <a class="text-reset mt-1" href="#">{{ produit.name }}</a>
+                                    <h3 class="d-block mt-2 mb-2" style="">${{ produit.price }}</h3>
+
+                                    <button class="btn btn-outline-success update-panier"
+                                            data-produit="{{ produit.id }}"
+                                            data-action="add">Ajouter au panier
+                                    </button>
+                                    <a style="float: right" class="btn btn-outline-secondary" href="#">
+                                        <i class="fa-solid fa-eye"></i>
+                                        {#                                        style="--fa-primary-color: #256fef; --fa-secondary-color: #256fef;#}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}

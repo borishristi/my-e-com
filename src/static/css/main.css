@@ -1,6 +1,5 @@
 body{
 	background-color: hsl(0, 0%, 98%);
-	padding: 10px;
 	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
@@ -13,17 +12,15 @@ h1,h2,h3,h4,h5,h6{
 	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 	background-color: #fff;
 	border-radius: 4px;
-	padding: 10px;
+	/*padding: 10px;*/
 }
 
 .thumbnail{
-	width: auto;
-	max-width: 400px;
-	height: auto;
-	max-height: 300px;
+	/*width: 276px;*/
+	/*height: 276px;*/
 	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
-    box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+    box-shadow: 1px 3px 5px -2px rgba(214,214,214,1);
 }
 
 .product{
@@ -119,4 +116,14 @@ h1,h2,h3,h4,h5,h6{
 a {
 	text-decoration: none;
 	color: black;
+}
+
+.product-box{
+	width: 330px;
+	height: 536px;
+}
+
+.image-box {
+	width: 276px;
+	height: 276px;
 }
