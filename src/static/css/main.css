@@ -1,5 +1,7 @@
 body{
 	background-color: hsl(0, 0%, 98%);
+	padding: 10px;
+	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -106,4 +108,15 @@ h1,h2,h3,h4,h5,h6{
 	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 	font-size: 5px;
 	color: #006b1b;
+}
+
+.footer-site {
+	margin-bottom: 0;
+	height: 300px;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
 }
