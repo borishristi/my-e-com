@@ -22,7 +22,8 @@ from django.contrib.auth.decorators import login_required
 def shop(request, *args, **kwargs):
     """Vue des produits"""
     # On récupère l'ensemble des produits
-    produits = Produit.objects.all()
+    produits = Produit.objects.filter(stock__gte=0, price__gte=0)
+    categories = Category.objects.all()
 
     # Vérification de la connectivité de l'utilisateur et récupérateur des informations sur le panier
     # if request.user.is_authenticated:
@@ -53,6 +54,7 @@ def shop(request, *args, **kwargs):
     context = {
         'produits': produits,
         'nombre_article': nombre_article,
+        'categories': categories,
     }
 
     return render(request, 'shop/index.html', context)
