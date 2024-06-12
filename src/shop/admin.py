@@ -13,7 +13,7 @@ class CategoryModelAdmin(admin.ModelAdmin):
 
 
 class ProduitModelAdmin(admin.ModelAdmin):
-    list_display = ('categorie', 'name', 'price', 'digital', 'image', 'date_ajout',)
+    list_display = ('categorie', 'name', 'price', 'stock', 'digital', 'image', 'date_ajout',)
 
 
 class CommandeModelAdmin(admin.ModelAdmin):
