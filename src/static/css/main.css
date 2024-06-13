@@ -1,7 +1,19 @@
 body{
-	background-color: hsl(0, 0%, 98%);
+	background-color: #ececec;
 	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
 }
+
+/* Design base.html */
+
+.menu-text {
+	 color: #ececec;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* Design content */
 
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
@@ -49,16 +61,14 @@ h1,h2,h3,h4,h5,h6{
 	border-radius: 0;
 }
 
-
 .panier-row{
 	display: flex;
-    align-items: flex-stretch;
+    /*align-items: flex-stretch;*/
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
 
 }
-
 
 .row-image{
 	width: 100px;
@@ -91,12 +101,6 @@ h1,h2,h3,h4,h5,h6{
 	/*margin: 5px;*/
 }
 
-/*.form-field{*/
-/*	width:250px;*/
-/*	display: inline-block;*/
-/*	padding: 5px;*/
-/*}*/
-
 .hidden{
 	display: none!important;
 }
@@ -111,11 +115,6 @@ h1,h2,h3,h4,h5,h6{
 	margin-bottom: 0;
 	height: 300px;
 	text-align: center;
-}
-
-a {
-	text-decoration: none;
-	color: black;
 }
 
 .product-box{
