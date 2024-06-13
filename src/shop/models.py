@@ -28,7 +28,7 @@ class Produit(models.Model):
     categorie = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name='client')
     name = models.CharField(max_length=100, null=True)
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    stock = models.IntegerField(max_length=3, default=10, blank=True, null=True)
+    stock = models.IntegerField(default=10, blank=True, null=True)
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(upload_to='shop', null=True, blank=True)
     date_ajout = models.DateTimeField(auto_now=True)
