@@ -71,6 +71,44 @@
 <body>
 {#  Debut du navbar#}
 
+<!-- Start Menu 1 -->
+
+<nav class="navbar navbar-expand" style="background-color: #2f435e">
+    <div class="container-fluid">
+        <div class="row p-1 m-0 w-100">
+            <div class="col-2 d-flex justify-content-center">
+                <a class="navbar-brand p-0" href="{% url 'shop:shop' %}">
+                    <img class="m-0" style="width: 100px; height: 30px" src="{% static 'images/logo-my-ecom.png' %}"
+                         alt="">
+                </a>
+            </div>
+            <div class="col-7" id="" style="color: #ececec">
+                <form action="" class="d-flex">
+                    <input style="border-radius: 25%;" class="form-control me-2 rounded-3 position-relative"
+                           type="search"
+                           placeholder="Qu'est-ce qui vous ferait plaisir?" aria-label="search">
+                    <span class="m-0 pt-2 position-absolute bt-success start-5"> > </span>
+                    {#                    <button class="btn btn-outline-success" type="submit">Rechercher</button>#}
+                </form>
+            </div>
+            <div style="float: right"
+                 class="col-3 border form-inline d-flex justify-content-evenly my-2 my-sm-0">
+                <span class="d-none d-lg-inline">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
+                <a href="#" class="btn btn-link" style="color: #ececec">
+                    <i class="fa-solid fa-right-to-bracket fa-2xl m-1" style="color: #ececec"></i>
+                </a>
+                <a class="text-primary" href="{% url 'shop:panier' %}" style="text-decoration: none;">
+                    <i class="fa-solid fa-cart-arrow-down fa-2xl mt-3" style="color: #ececec;"></i>
+                    <p class="border" style="border: 1px" id="total-panier">{{ nombre_article }}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- End Menu 2 -->
+
+<!-- Start Menu 2 -->
 <nav class="navbar navbar-expand-md" style="background-color: #2f435e">
     <div class="container-fluid">
         <a class="navbar-brand p-0" href="{% url 'shop:shop' %}">
@@ -83,10 +121,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="color: #ececec">
             <ul class="navbar-nav me-auto mb-2 mb-md-0 pb-0">
                 <li class="nav-item">
-                    <a style="color: #ececec" class="nav-link active menu-text" aria-current="page" href="{% url 'shop:shop' %}">Boutique</a>
+                    <a style="color: #ececec" class="nav-link active menu-text" aria-current="page"
+                       href="{% url 'shop:shop' %}">Boutique</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a style="color: #ececec" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    <a style="color: #ececec" class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                       role="button"
                        data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Categories
@@ -112,6 +152,7 @@
         </div>
     </div>
 </nav>
+<!-- End Menu 2 -->
 
 {#  Fin du navbar#}
 
@@ -147,7 +188,8 @@
             </div>
         </div>
         <hr>
-        <div style="text-align: center"><span>copyright: <a href="https://www.myecom.com">www.myecom.com</a></span></div>
+        <div style="text-align: center"><span>copyright: <a href="https://www.myecom.com">www.myecom.com</a></span>
+        </div>
     </div>
 </footer>
 
