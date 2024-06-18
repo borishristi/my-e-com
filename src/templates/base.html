@@ -7,6 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
     <script src="https://kit.fontawesome.com/bcfa7a8368.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -76,30 +77,39 @@
 <nav class="navbar navbar-expand" style="background-color: #2f435e">
     <div class="container-fluid">
         <div class="row p-1 m-0 w-100">
-            <div class="col-2 d-flex justify-content-center">
+            <div id="logo_div"
+                 class="col-6 col-lg-2 order-1 p-0 d-flex  justify-content-start justify-content-lg-center">
                 <a class="navbar-brand p-0" href="{% url 'shop:shop' %}">
                     <img class="m-0" style="width: 100px; height: 30px" src="{% static 'images/logo-my-ecom.png' %}"
                          alt="">
                 </a>
             </div>
-            <div class="col-7" id="" style="color: #ececec">
-                <form action="" class="d-flex">
-                    <input style="border-radius: 25%;" class="form-control me-2 rounded-3 position-relative"
-                           type="search"
-                           placeholder="Qu'est-ce qui vous ferait plaisir?" aria-label="search">
-                    <span class="m-0 pt-2 position-absolute bt-success start-5"> > </span>
-                    {#                    <button class="btn btn-outline-success" type="submit">Rechercher</button>#}
-                </form>
+            <div id="search_div" class="col-12 col-lg-7 order-3 order-lg-1 p-0 " id="" style="color: #ececec">
+                <!-- Search bar -->
+                <div class="d-flex justify-content-center h-100">
+                    <div class="search w-100">
+                        <input class="search_input" type="text" name="search" aria-label="search"
+                               placeholder="Qu'est-ce qui vous ferait plaisir...">
+                        <a href="#" style="text-decoration: none;" class="search_icon"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+
             </div>
-            <div style="float: right"
-                 class="col-3 border form-inline d-flex justify-content-evenly my-2 my-sm-0">
-                <span class="d-none d-lg-inline">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>
-                <a href="#" class="btn btn-link" style="color: #ececec">
-                    <i class="fa-solid fa-right-to-bracket fa-2xl m-1" style="color: #ececec"></i>
+            <div id="menu_div" style="float: right"
+                 class="col-6 col-lg-3 order-2 p-0 form-inline d-flex justify-content-end justify-content-lg-evenly my-2 my-sm-0">
+                {#                <span class="d-none d-lg-inline">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>#}
+                <span class="p-0 pt-1" style="color: #ececec; font-size: 30px; font-weight: bolder">M</span>
+                <a id="logo_user_link" href="#" class="" style="color: #ececec">
+                    <i id="logo_user" style="color: #ececec; text-decoration: none;"></i>
+                    <span id="mon_panier" class="position-absolute bottom-0 start-0 pt-2 d-none d-lg-inline"
+                          style="color: #ececec; font-size: small">Mon compte</span>
                 </a>
-                <a class="text-primary" href="{% url 'shop:panier' %}" style="text-decoration: none;">
-                    <i class="fa-solid fa-cart-arrow-down fa-2xl mt-3" style="color: #ececec;"></i>
-                    <p class="border" style="border: 1px" id="total-panier">{{ nombre_article }}</p>
+                <a class="px-2 px-lg-2 position-relative" href="{% url 'shop:panier' %}"
+                   style="text-decoration: none;">
+                    <i class="fa-solid fa-cart-arrow-down fa-xl mt-4" style="color: #ececec;"></i>
+                    <p class="" style="font-size: small" id="total-panier">{{ nombre_article }}</p>
+                    <span id="mon_panier" class="position-absolute bottom-0 start-0 pt-2 d-none d-lg-inline"
+                          style="color: #ececec; font-size: small">Mon panier</span>
                 </a>
             </div>
         </div>
@@ -194,6 +204,7 @@
 </footer>
 
 <script type="text/javascript" src="{% static 'js/panier.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
