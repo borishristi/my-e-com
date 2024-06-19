@@ -5,6 +5,7 @@ let menu_div = document.getElementById('menu_div');
 let logo_user = document.getElementById('logo_user');
 let logo_user_link = document.getElementById('logo_user_link');
 let mon_panier = document.getElementById('mon_panier');
+let btn_sidebar = document.getElementsByClassName('btn-sidebar');
 
 
 // search_div.className = 'd-none';
@@ -20,3 +21,7 @@ if (user == 'AnonymousUser') {
     logo_user.className = 'fa-solid fa-user-check fa-xl pb-0 mt-3';
     logo_user_link.className = 'px-2 pt-2 px-lg-4 position-relative';
 }
+
+btn_sidebar.addEventListener("mouseover", () => {
+    btn_sidebar.style.color = "black";
+})

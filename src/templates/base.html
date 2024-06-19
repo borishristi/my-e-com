@@ -14,11 +14,11 @@
     <!-- Fichier CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
-{#    <link rel="stylesheet" type="text/css" href="{% static 'css/menu_coullissant.css' %}">#}
-{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">#}
-{#    <link rel="stylesheet"#}
-{#          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>#}
+    {#    <link rel="stylesheet" type="text/css" href="{% static 'css/menu_coullissant.css' %}">#}
+    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">#}
+    {#    <link rel="stylesheet"#}
+    {#          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">#}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>#}
 
     <!-- Kit Font Awesome -->
     <script src="https://kit.fontawesome.com/bcfa7a8368.js" crossorigin="anonymous"></script>
@@ -140,19 +140,77 @@
 {##}
 {#<!-- Start Menu 2 -->#}
 <div class="navbar navbar-expand border" style="background-color: #2f435e; overflow: hidden">
-    <span style="" class="d-inline-block"><a href="#" id="btn-cat" class="btn btn-outline-white border-white m-1 pt-0 btn-cat">Tous nos rayons</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Voyages</a></span>
-    <span style=""><a href="#" id="btn-cat" class=" btn bg-secondary m-1 pt-0 btn-cat">Forfait-Mobile</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Seconde-Vie</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Carte-My-Ecom</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-France</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-Cameroun</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Tourisme</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Vestimentaire</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Enfant</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Décoration</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Mariage</a></span>
-    <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Afritude</a></span>
+
+    <!-- Start Menu SideBar -->
+
+    {#    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"#}
+    {#       aria-controls="offcanvasExample">#}
+    {#        Link with href#}
+    {#    </a>#}
+    <div class="col-2">
+        <button class="btn btn-outline-light btn-sidebar border-white" id="side-cat" type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample">
+            <i class="fa-solid fa-bars me-1"></i>Tous nos rayons
+        </button>
+    </div>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header" style="background-color: #2f435e">
+            <h5 class="offcanvas-title text-dark" id="offcanvasExampleLabel">Nos Rayons</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            {% for category in categories %}
+                <div class="">
+                    <a id="link-cat" style="text-decoration: none;" class="d-block text-reset pt-3 link-cat"
+                       href="#">
+                        <span class="bg-secondary p-2 me-" style="border-radius: 100%;">
+                            <i class="fa-solid fa-shirt ps-1"></i>
+                        </span>
+                        <span class="ms-3 text-cat">{{ category.name|capfirst }}</span>
+                    </a>
+                </div>
+                <hr class="p-0 mt-4">
+            {% endfor %}
+
+            <div>
+                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images,
+                lists, etc.
+            </div>
+            <div class="dropdown mt-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Dropdown button
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Menu SideBar -->
+
+    <!-- Categories bar -->
+    <div>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Voyages</a></span>
+        <span style=""><a href="#" id="btn-cat" class=" btn bg-secondary m-1 pt-0 btn-cat">Forfait-Mobile</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Seconde-Vie</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Carte-My-Ecom</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-France</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-Cameroun</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Tourisme</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Vestimentaire</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Enfant</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Décoration</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Mariage</a></span>
+        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Afritude</a></span>
+    </div>
 </div>
 
 </nav>

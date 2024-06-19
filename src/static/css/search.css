@@ -68,3 +68,13 @@ a:link {
     color: #ececec;
     display: inline-block;
 }
+
+
+#side-cat {
+    /*width: auto;*/
+    /*height: 30px;*/
+    border-radius: 40px;
+    color: #ececec;
+    display: inline-block;
+    line-height: normal;
+}

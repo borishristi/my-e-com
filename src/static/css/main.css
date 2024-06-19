@@ -128,3 +128,7 @@ h1,h2,h3,h4,h5,h6{
 	width: 276px;
 	height: 276px;
 }
+
+#link-cat:hover {
+	display: none;
+}
