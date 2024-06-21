@@ -5,7 +5,7 @@ let menu_div = document.getElementById('menu_div');
 let logo_user = document.getElementById('logo_user');
 let logo_user_link = document.getElementById('logo_user_link');
 let mon_panier = document.getElementById('mon_panier');
-let btn_sidebar = document.getElementsByClassName('btn-sidebar');
+let btn_sidebar = document.querySelector('.btn-sidebar');
 
 
 // search_div.className = 'd-none';
