@@ -88,12 +88,12 @@
 
 </head>
 
-<body>
+<body style="background-color: #F2F3F5">
 {#  Debut du navbar#}
 
 <!-- Start Menu 1 -->
 
-<nav class="navbar navbar-expand" style="background-color: #2f435e">
+<nav class="navbar navbar-expand sticky-top" style="background-color: #2f435e">
     <div class="container-fluid">
         <div class="row p-1 m-0 w-100">
             <div id="logo_div"
@@ -128,7 +128,7 @@
                     <i class="fa-solid fa-cart-arrow-down fa-xl mt-4" style="color: #ececec;"></i>
                     <p class="" style="font-size: small" id="total-panier">{{ nombre_article }}</p>
                     <span id="mon_panier" class="position-absolute bottom-0 start-0 pt-2 d-none d-lg-inline"
-                          style="color: #ececec; font-size: small">Mon panier</span>
+                          style="color: #ececec; font-size: small">Panier</span>
                 </a>
             </div>
         </div>
@@ -327,6 +327,7 @@
 <script type="text/javascript" src="{% static 'js/panier.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/menu_coullisant.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/index.js' %}" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

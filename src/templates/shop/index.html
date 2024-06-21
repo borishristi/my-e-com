@@ -7,139 +7,146 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-3">
+    <div class="container border border-success mt-2">
         <div>
+            {#            <div class="row">#}
+            {#                <div class="col-2" style="background-color: #2f435e; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#                <div class="col-2" style="background-color: #44566c; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#                <div class="col-2" style="background-color: #ececec; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#                <div class="col-2" style="background-color: #4b5e65; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#                <div class="col-2" style="background-color: #201b22; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#                <div class="col-2" style="background-color: orangered; width: 100%; height: 50px;">#}
+            {##}
+            {#                </div>#}
+            {#            </div>#}
+        </div>
+        <!-- Containeur pour les actions, tris et autres -->
+        <div class="col-12 col-lg-12 border border-dark d-none">
             <div class="row">
-                <div class="col-2" style="background-color: #2f435e; width: 100%; height: 50px;">
-
+                <div class="col-4 col-lg-12 mb-2">
+                    {#                        <h5>Catégorie</h5>#}
+                    {#                        {% for category in categories %}#}
+                    {#                            <a style="text-decoration: none;" class="d-block text-reset" href="#">#}
+                    {#                                {{ category.name|capfirst }} <i class="fa-solid fa-arrow-right"></i>#}
+                    {#                            </a>#}
+                    {#                        {% endfor %}#}
                 </div>
-                <div class="col-2" style="background-color: #44566c; width: 100%; height: 50px;">
 
-                </div>
-                <div class="col-2" style="background-color: #ececec; width: 100%; height: 50px;">
-
-                </div>
-                <div class="col-2" style="background-color: #4b5e65; width: 100%; height: 50px;">
-
-                </div>
-                <div class="col-2" style="background-color: #201b22; width: 100%; height: 50px;">
-
-                </div>
-                <div class="col-2" style="background-color: orangered; width: 100%; height: 50px;">
-
+                <div class="col-8 col-lg-12">
+                    <h5>Prix</h5>
+                    <form>
+                        <div class="row p-2">
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_1">
+                                <label class="form-check-label" for="price_1">
+                                    0 à 100 $
+                                </label>
+                            </div>
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_2">
+                                <label class="form-check-label" for="price_2">
+                                    101 à 500 $
+                                </label>
+                            </div>
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_3">
+                                <label class="form-check-label" for="price_3">
+                                    501 à 1000 $
+                                </label>
+                            </div>
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_4">
+                                <label class="form-check-label" for="price_4">
+                                    1 001 à 5 000 $
+                                </label>
+                            </div>
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_5">
+                                <label class="form-check-label" for="price_5">
+                                    5 001 à 10 000 $
+                                </label>
+                            </div>
+                            <div class="col-4 col-lg-12 form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="price_6">
+                                <label class="form-check-label" for="price_6">
+                                    plus de 10 000 $
+                                </label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enStock">
+                                <label class="form-check-label" for="enStock">
+                                    En stock
+                                </label>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-success m-1">Appliquer les filtres
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <!-- Containeur pour les actions, tris et autres -->
-            <div class="col-12 col-lg-2 border border-dark">
-                <div class="row">
-                    <div class="col-4 col-lg-12 mb-2">
-                        <h5>Catégorie</h5>
-                        {% for category in categories %}
-                            <a style="text-decoration: none;" class="d-block text-reset" href="#">
-                                {{ category.name|capfirst }} <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        {% endfor %}
-                    </div>
 
-                    <div class="col-8 col-lg-12">
-                        <h5>Prix</h5>
-                        <form>
-                            <div class="row p-2">
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_1">
-                                    <label class="form-check-label" for="price_1">
-                                        0 à 100 $
-                                    </label>
-                                </div>
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_2">
-                                    <label class="form-check-label" for="price_2">
-                                        101 à 500 $
-                                    </label>
-                                </div>
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_3">
-                                    <label class="form-check-label" for="price_3">
-                                        501 à 1000 $
-                                    </label>
-                                </div>
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_4">
-                                    <label class="form-check-label" for="price_4">
-                                        1 001 à 5 000 $
-                                    </label>
-                                </div>
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_5">
-                                    <label class="form-check-label" for="price_5">
-                                        5 001 à 10 000 $
-                                    </label>
-                                </div>
-                                <div class="col-4 col-lg-12 form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="price_6">
-                                    <label class="form-check-label" for="price_6">
-                                        plus de 10 000 $
-                                    </label>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="enStock">
-                                    <label class="form-check-label" for="enStock">
-                                        En stock
-                                    </label>
-                                </div>
-                                <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-outline-success m-1">Appliquer les filtres
-                                    </button>
-                                </div>
+        <!-- Containeur pour les produits à vendres -->
+        <div class="container col-12 border border-primary">
+            <div class="row border border-danger d-flex">
+                {#  On affiche tous les produits grâce à une boucle for  #}
+                {% for produit in produits %}
+                    <div class="product-box d-flex justify-content-center border border-success col-12 col-md-6 col-lg-3">
+                        <div style="width: 288px; height: 505px;"
+                             class="">
+
+                            <div class="image-box border border-danger">
+                                <img style="width: 100%; height: 100%;" class=""
+                                     src=" {{ produit.imageUrl }} " alt="">
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                            {##}
+                            <div class="product-body border border-danger">
+                                <a class="text-reset mt-1" ref="#"
+                                   style="text-decoration: none;">{{ produit.name|truncatewords:12 }}
+                                </a>
+                                <br>
+                                <i class="fa-solid fa-star" data-star="1"></i>
+                                <i class="fa-solid fa-star" data-star="2"></i>
+                                <i class="fa-solid fa-star" data-star="3"></i>
+                                <i class="fa-solid fa-star" data-star="4"></i>
+                                <i class="fa-solid fa-star" data-star="5"></i>
+                                &nbsp;note: <span class="rating">-</span>
 
-            <!-- Containeur pour les produits à vendres -->
-            <div class="col-12 col-lg-10">
-                <div class="row">
-                    {#  On affiche tous les produits grâce à une boucle for  #}
-                    {% for produit in produits %}
-                        <div class="product-box col-12 col-md-6 col-lg-4 p-0">
-                            <div style="width: 330px; min-height: 450px; box-shadow: 0px 1px 5px 0px rgba(214,214,214,1)"
-                                 class="m-0 mt-3 m-auto p-1">
+                                <h3 class="d-block mt-2 mb-2" style="">${{ produit.price }}</h3>
+                                {% if produit.stock > 1 %}
+                                    <span class="d-block mt-2 mb-2 light"
+                                          style="">{{ produit.stock }} pièces disponibles</span>
+                                {% elif produit.stock == 1 %}
+                                    <span class="d-block mt-2 mb-2 light"
+                                          style="">{{ produit.stock }} pièce disponible</span>
+                                {% else %}
+                                    <span class="d-block mt-2 mb-2 light ">Indisponible actuellement </span>
+                                {% endif %}
 
-                                <div class="image-box p-0 m-0">
-                                    <img style="width: 320px; height: 276px;" class="thumbnail m-auto"
-                                         src=" {{ produit.imageUrl }} " alt="">
-                                </div>
-
-                                <div class="">
-                                    <a class="text-reset mt-1" href="#">{{ produit.name }}</a>
-                                    <h3 class="d-block mt-2 mb-2" style="">${{ produit.price }}</h3>
-                                    {% if produit.stock > 1 %}
-                                        <span class="d-block mt-2 mb-2 light" style="">{{ produit.stock }} pièces disponibles</span>
-                                    {% elif produit.stock == 1 %}
-                                        <span class="d-block mt-2 mb-2 light" style="">{{ produit.stock }} pièce disponible</span>
-                                    {% else %}
-                                        <span class="m-1">Indisponible actuellement </span>
-                                    {% endif %}
-
-                                    {#                                    <span class="d-block mt-2 mb-2 light" style="">{{ produit.stock }} pièces disponibles</span>#}
-
-                                    <button class="btn btn-outline-success update-panier"
-                                            data-produit="{{ produit.id }}"
-                                            data-action="add">Ajouter au panier
-                                    </button>
-                                    <a style="float: right" class="btn btn-outline-secondary" href="#">
-                                        <i class="fa-solid fa-eye"></i>
-                                        {#                                        style="--fa-primary-color: #256fef; --fa-secondary-color: #256fef;#}
-                                    </a>
-                                </div>
+                                <button class="btn btn-outline-success update-panier"
+                                        data-produit="{{ produit.id }}" data-action="add">Ajouter au panier
+                                </button>
+                                <a style="float: right" class="btn btn-outline-secondary" href="#">
+                                    <i class="fa-solid fa-eye"
+                                       style="color: #256fef;"></i>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
