@@ -15,9 +15,15 @@
     padding: 5px;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 622px) {
     .search_icon {
         margin-top: -28px;
+    }
+}
+
+@media screen and (min-width: 622px) and (max-width: 991px) {
+    .search_icon{
+        margin-top: 0;
     }
 }
 

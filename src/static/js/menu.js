@@ -11,11 +11,11 @@ let btn_sidebar = document.getElementsByClassName('btn-sidebar');
 // search_div.className = 'd-none';
 
 if (user == 'AnonymousUser') {
-    logo_user.className = 'fa-solid fa-right-to-bracket fa-xl pb-0 mt-3 border';
+    logo_user.className = 'fa-solid fa-right-to-bracket fa-xl pb-0 mt-3';
     mon_panier.innerText = 'Connexion';
     mon_panier.style.float = 'center';
     mon_panier.style.marginLeft = '7px';
-    logo_user_link.className = 'px-0 pt-2 px-lg-4 position-relative border';
+    logo_user_link.className = 'px-0 pt-2 px-lg-4 position-relative';
     logo_user_link.style.textDecoration = 'none';
 } else {
     logo_user.className = 'fa-solid fa-user-check fa-xl pb-0 mt-3';

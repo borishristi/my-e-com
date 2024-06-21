@@ -107,23 +107,23 @@
                 <!-- Search bar -->
                 <div class="d-flex justify-content-center h-100">
                     <div class="search w-100">
-                        <input class="search_input" type="text" name="search" aria-label="search"
+                        <input class="search_input roboto-regular" type="text" name="search" aria-label="search"
                                placeholder="Qu'est-ce qui vous ferait plaisir...">
                         <a href="#" style="text-decoration: none;" class="search_icon"><i class="fa fa-search"></i></a>
                     </div>
                 </div>
 
             </div>
-            <div id="menu_div" style="float: right"
-                 class="col-6 col-lg-3 order-2 p-0 form-inline d-flex justify-content-end justify-content-lg-evenly my-2 my-sm-0">
+            <div id="menu_div" style="float: left"
+                 class="col-6 col-lg-3 order-2 p-0 form-inline d-flex justify-content-between justify-content-lg-evenly my-2 my-sm-0">
                 {#                <span class="d-none d-lg-inline">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</span>#}
                 <span class="p-0 pt-1" style="color: #ececec; font-size: 30px; font-weight: bolder">M</span>
                 <a id="logo_user_link" href="#" class="" style="color: #ececec">
-                    <i id="logo_user" style="color: #ececec; text-decoration: none;"></i>
+                    <i id="logo_user" style="color: #ececec; text-decoration: none;" ></i>
                     <span id="mon_panier" class="position-absolute bottom-0 start-0 pt-2 d-none d-lg-inline"
                           style="color: #ececec; font-size: small">Mon compte</span>
                 </a>
-                <a class="px-2 px-lg-2 position-relative" href="{% url 'shop:panier' %}"
+                <a class="px-3 px-lg-2 position-relative" href="{% url 'shop:panier' %}"
                    style="text-decoration: none;">
                     <i class="fa-solid fa-cart-arrow-down fa-xl mt-4" style="color: #ececec;"></i>
                     <p class="" style="font-size: small" id="total-panier">{{ nombre_article }}</p>
@@ -139,15 +139,8 @@
 {#<div class="d-none">#}
 {##}
 {#<!-- Start Menu 2 -->#}
-<div class="navbar navbar-expand border" style="background-color: #2f435e; overflow: hidden">
-
-    <!-- Start Menu SideBar -->
-
-    {#    <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"#}
-    {#       aria-controls="offcanvasExample">#}
-    {#        Link with href#}
-    {#    </a>#}
-    <div class="col-2">
+<div class="navbar navbar-expand" style="background-color: #2f435e; overflow: hidden">
+    <div class="col-6 col-sm-3 col-md-2 ms-3">
         <button class="btn btn-outline-light btn-sidebar border-white" id="side-cat" type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasExample"
@@ -202,14 +195,14 @@
         <span style=""><a href="#" id="btn-cat" class=" btn bg-secondary m-1 pt-0 btn-cat">Forfait-Mobile</a></span>
         <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Seconde-Vie</a></span>
         <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Carte-My-Ecom</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-France</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-Cameroun</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Tourisme</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Vestimentaire</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Enfant</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Décoration</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Mariage</a></span>
-        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Afritude</a></span>
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-France</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Made-in-Cameroun</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Tourisme</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Vestimentaire</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Enfant</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Décoration</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Mariage</a></span>#}
+{#        <span style=""><a href="#" id="btn-cat" class="btn bg-secondary m-1 pt-0 btn-cat">Afritude</a></span>#}
     </div>
 </div>
 

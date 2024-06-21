@@ -1,8 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@300;400;500;700&display=swap');
+
 body{
 	background-color: #ececec;
 	font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+	/*font-family: "Roboto", sans-serif;*/
+  	font-weight: 400;
+  	font-style: normal;
 }
 
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* <uniquifier>: Use a unique and descriptive class name */
+/* <weight>: Use a value from 100 to 900 */
+
+/*.montserrat-<uniquifier> {*/
+/*  font-family: "Montserrat", sans-serif;*/
+/*  font-optical-sizing: auto;*/
+/*  font-weight: <weight>;*/
+/*  font-style: normal;*/
+/*}*/
 /* Design base.html */
 
 .menu-text {
