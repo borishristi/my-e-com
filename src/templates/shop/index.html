@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container border border-success mt-2">
+    <div class="container mt-2">
         <div>
             {#            <div class="row">#}
             {#                <div class="col-2" style="background-color: #2f435e; width: 100%; height: 50px;">#}
@@ -31,7 +31,7 @@
             {#            </div>#}
         </div>
         <!-- Containeur pour les actions, tris et autres -->
-        <div class="col-12 col-lg-12 border border-dark d-none">
+        <div class="col-12 col-lg-12 d-none">
             <div class="row">
                 <div class="col-4 col-lg-12 mb-2">
                     {#                        <h5>Catégorie</h5>#}
@@ -99,20 +99,18 @@
         </div>
 
         <!-- Containeur pour les produits à vendres -->
-        <div class="container col-12 border border-primary">
-            <div class="row border border-danger d-flex">
+        <div class="container col-12 mt-3">
+            <div class="row d-flex" style="background-color: #1b1b1b;">
                 {#  On affiche tous les produits grâce à une boucle for  #}
                 {% for produit in produits %}
-                    <div class="product-box d-flex justify-content-center border border-success col-12 col-md-6 col-lg-3">
-                        <div style="width: 288px; height: 505px;"
-                             class="">
-
-                            <div class="image-box border border-danger">
+                    <div class="product-box p-0 d-flex justify-content-center col-12 col-md-6 col-lg-4">
+                        <div class="m-2">
+                            <div class="image-box">
                                 <img style="width: 100%; height: 100%;" class=""
                                      src=" {{ produit.imageUrl }} " alt="">
                             </div>
                             {##}
-                            <div class="product-body border border-danger">
+                            <div class="product-body">
                                 <a class="text-reset mt-1" ref="#"
                                    style="text-decoration: none;">{{ produit.name|truncatewords:12 }}
                                 </a>
